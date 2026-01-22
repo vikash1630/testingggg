@@ -1,11 +1,22 @@
-const express = require("express")
-const app = express()
+const express = require("express");
+const app = express();
 
-app.get("/",(req,res)=> {
-    console.log("Hello from simple server")
-})
+// Middleware (good practice)
+app.use(express.json());
 
+// Root route
+app.get("/", (req, res) => {
+  console.log("Hello from simple server");
+  res.status(200).json({
+    success: true,
+    message: "Backend server is running 🚀"
+  });
+});
 
-const PORT = 4000
+// Port
+const PORT = process.env.PORT || 4000;
 
-app.listen(PORT,()=>console.log(`Server is running on port ${PORT}`))
+// Start server
+app.listen(PORT, () => {
+  console.log(`✅ Server is running on http://localhost:${PORT}`);
+});
